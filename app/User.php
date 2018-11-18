@@ -6,7 +6,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+use Tymon\JWTAuth\Contracts\JWTSubject;
+class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
 
@@ -31,5 +32,21 @@ class User extends Authenticatable
 
     public function role() {
         return $this->hasOne('App\Userrole');
+    }
+
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+    * Return a key value array, containing any custom claims to be added to the JWT.
+    *
+    * @return array
+    */
+    public function getJWTCustomClaims()
+    {
+        return [];
     }
 }
