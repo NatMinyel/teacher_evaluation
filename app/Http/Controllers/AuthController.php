@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\User;
 
 class AuthController extends Controller
 {
@@ -12,9 +13,8 @@ class AuthController extends Controller
     *
     * @return void
     */
-    public function __construct()
-    {
-    $this->middleware('auth:api', ['except' => ['login', 'register']]);
+    public function __construct() {
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
     /**
     * Get a JWT via given credentials.
@@ -23,17 +23,19 @@ class AuthController extends Controller
     */
     public function register(Request $request)
     {
-    $this->validate($request, [
-    'name' => 'required',
-    'email' => 'required|email',
-    'password' => 'required|min:6',
-    ]);
-    $user = new User();
-    $user->name = $request->name;
-    $user->email = $request->email;
-    $user->password = bcrypt($request->password);
-    $user->save();
-    return response()->json(['user' => $user]);
+        $this->validate($request, [
+            'username' => 'required',
+            'name' => 'nullable',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+        $user = new User();
+        $user->username = $request->username;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return response()->json(['user' => $user]);
     }
     /**
     * Get a JWT via given credentials.
@@ -42,11 +44,12 @@ class AuthController extends Controller
     */
     public function login()
     {
-    $credentials = request(['email', 'password']);
-    if (! $token = auth('api')->attempt($credentials)) {
-    return response()->json(['error' => 'Unauthorized'], 401);
-    }
-    return $this->respondWithToken($token);
+        $credentials = request(['email', 'password']);
+        if (! $token = auth('api')->attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+        $token = auth('api')->refresh();
+        return $this->respondWithToken($token);
     }
     /**
     * Get the authenticated User.
@@ -55,7 +58,7 @@ class AuthController extends Controller
     */
     public function me()
     {
-    return response()->json(auth('api')->user());
+        return response()->json(auth('api')->user());
     }
     /**
     * Log the user out (Invalidate the token).

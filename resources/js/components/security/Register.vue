@@ -18,6 +18,11 @@
                             <span v-if="errors.has('name')" class="invalid-feedback" role="alert">{{ errors.first('name') }}</span>
                         </div>
                         <div class="form-group row">
+                            <label for="name">Username</label>
+                            <input type="text" name="username" class="form-control" v-validate="'required'" v-model="formRegister.username" placeholder="Username">
+                            <span v-if="errors.has('username')" class="invalid-feedback" role="alert">{{ errors.first('username') }}</span>
+                        </div>
+                        <div class="form-group row">
                             <label for="email">Email</label>
                             <input type="email" name="email" v-validate="'required|email'" class="form-control" v-model="formRegister.email" placeholder="Email address">
                             <span v-if="errors.has('email')" class="invalid-feedback" role="alert">{{ errors.first('email') }}</span>
@@ -38,16 +43,17 @@
 </template>
 
 <script>
-import {registerUser} from '../partials/auth';
+import {registerUser} from '../../partials/auth';
 export default {
     data(){
         return {
             formRegister: {
-            name: '',
-            email: '',
-            password: ''
-        },
-        error: null
+                name: '',
+                email: '',
+                password: '',
+                username: ''
+            },
+            error: null
         }
     },
     methods:{

@@ -32,36 +32,36 @@
 </template>
 
 <script>
-import {login} from '../partials/auth';
+import {login} from '../../partials/auth';
 export default {
     data(){
         return {
             formLogin: {
-            email: '',
-            password: ''
+                email: '',
+                password: ''
+            },
+            error: null
+            }
         },
-        error: null
-        }
-    },
-    methods:{
-        authenticate(){
-            this.$store.dispatch('login');
-        login(this.$data.formLogin)
-            .then(res => {
-                this.$store.commit("loginSuccess", res);
-                this.$router.push({path: '/dashboard'});
-            })
-            .catch(error => {
-                this.$store.commit("loginFailed", {error});
-            })
-        }
+        methods:{
+            authenticate(){
+                this.$store.dispatch('login');
+                login(this.$data.formLogin)
+                    .then(res => {
+                        this.$store.commit("loginSuccess", res);
+                        this.$router.push({path: '/dashboard'});
+                    })
+                    .catch(error => {
+                        this.$store.commit("loginFailed", {error});
+                    });
+            }
     },
     computed:{
         authError(){
-            return this.$store.getters.authError
+            return this.$store.getters.authError;
         },
         registeredUser(){
-            return this.$store.getters.registeredUser
+            return this.$store.getters.registeredUser;
         }
     }
 }

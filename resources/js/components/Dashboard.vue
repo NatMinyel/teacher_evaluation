@@ -6,8 +6,8 @@
 <script>
     export default {
         computed:{
-        currentUser(){
-                return this.$store.getters.currentUser
+            currentUser(){
+                return this.$store.getters.currentUser;
             }
         }
     }

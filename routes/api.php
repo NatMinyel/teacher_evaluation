@@ -20,3 +20,17 @@ Route::group(['prefix' => 'auth'], function ($router) {
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
 });
+Route::group(['prefix' => 'courses'], function ($router) {
+    Route::post('create', 'CourseController@create');
+    Route::get('', 'CourseController@index');
+
+    Route::get('{id}', 'CourseController@show');
+    // Route::put('{id}', 'CourseController@show');
+    Route::put('{id}', 'CourseController@update');
+    Route::delete('{id}', 'CourseController@destroy');
+});
+
+// Route::resource('/courses', 'CourseController', [
+//     'except' => ['edit', 'show', 'store']
+// ]);
+
