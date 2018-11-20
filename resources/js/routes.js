@@ -5,6 +5,7 @@ import Register from './components/security/Register.vue';
 import Courses from './components/course/Courses.vue';
 import CreateCourse from './components/course/CreateCourse.vue';
 import ViewCourse from './components/course/ViewCourse.vue';
+import UpdateCourse from './components/course/UpdateCourse.vue';
 export const routes = [
     {
         path: '/',
@@ -34,5 +35,9 @@ export const routes = [
         path: '/courses/:id',
         name: 'view-course',
         component: ViewCourse
+    }, {
+        path: '/courses/:id/update',
+        name: 'update-course',
+        component: UpdateCourse
     }
 ]

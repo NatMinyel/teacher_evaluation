@@ -25,7 +25,7 @@ export function getCourses(token){
             res(response.data);
         })
         .catch(err => {
-            rej('Courses can not be fetched');
+            rej('Courses could not be fetched');
         })
     });
 }
@@ -38,8 +38,33 @@ export function getCourseById(id, token){
             res(response.data);
         })
         .catch(err => {
-            rej('Courses can not be fetched');
+            rej('Course could not be fetched');
         })
     });
 }
 
+export function updateCourse(id, data, token){
+    console.log(id, data, token);
+    return new Promise((res, rej)=>{
+        axios.put("/api/courses/" + id, data, {headers: {'Authorization': 'Bearer ' + token}})
+        .then(response => {
+            res(response.data);
+        })
+        .catch(err => {
+            rej('Course could not be updated');
+        })
+    });
+}
+
+export function deleteCourse(id, token){
+    console.log(id, token);
+    return new Promise((res, rej)=>{
+        axios.delete("/api/courses/" + id, {headers: {'Authorization': 'Bearer ' + token}})
+        .then(response => {
+            res(response.data);
+        })
+        .catch(err => {
+            rej('Course could not be deleted');
+        })
+    });
+}

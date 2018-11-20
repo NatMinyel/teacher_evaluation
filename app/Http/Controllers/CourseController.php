@@ -16,11 +16,6 @@ class CourseController extends Controller
     protected $user;
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['index', 'create']]);
-        // try {
-        // $this->user = JWTAuth::parseToken()->authenticate();
-        // } catch (\Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
-        //     error_log($e->message);
-        // }
     }
 
 
@@ -28,14 +23,12 @@ class CourseController extends Controller
     {
 
         $token = $request->bearerToken();
-        error_log($token);
         JWTAuth::setToken($token);
         // TODO: Errors 
         // Tymon \ JWTAuth \ Exceptions \ TokenInvalidException
         // Tymon \ JWTAuth \ Exceptions \ TokenExpiredException
         // 
         $user = JWTAuth::toUser();
-        error_log($user->username);
         return response(Course::all()->jsonSerialize(), Response::HTTP_OK);
     }
 
@@ -50,7 +43,6 @@ class CourseController extends Controller
         $token = $request->bearerToken();
         JWTAuth::setToken($token);
         // error_log("Authentication: bearer");    
-        error_log($token);
 
         // TODO: Errors 
         // Tymon \ JWTAuth \ Exceptions \ TokenInvalidException
@@ -105,9 +97,7 @@ class CourseController extends Controller
         $token = $request->bearerToken();
         JWTAuth::setToken($token);
         // error_log("Authentication: bearer");    
-        error_log($token);
         $user = JWTAuth::toUser();
-        error_log($user->username);
         // TODO: Handle not found error
         return response(Course::find($id)->jsonSerialize(), Response::HTTP_OK);
     }
@@ -130,9 +120,42 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Course $course)
+    public function update(Request $request, $id)
     {
-        //
+        $token = $request->bearerToken();
+        JWTAuth::setToken($token);
+
+        // TODO: Errors 
+        // Tymon \ JWTAuth \ Exceptions \ TokenInvalidException
+        // Tymon \ JWTAuth \ Exceptions \ TokenExpiredException
+        // 
+        $user = JWTAuth::toUser();
+        if ($user->username != null) {
+            // TODO:  Validation of form data
+            // $this->validate($request, [
+            //     'name' => 'required',
+            //     'description' => 'nullable',
+            //     'is_all_year' => 'boolean',
+            //     'year_offered' => 'numeric|between:1,7',
+            //     'semester_offered' => 'numeric|between:1,4',
+            //     'program' => 'numeric|between:1,3'
+            //     ]);
+            // error_log(gettype($requestJ));
+            // TODO: Check if course exists
+            $course = Course::find($id);
+            $course->name = $request->name;
+            $course->description = $request->description;
+            $course->is_all_year = $request->is_all_year;
+            $course->year_offered = $request->year_offered;
+            $course->semester_offered = $request->semester_offered;
+            $course->program = $request->program;
+            $course->created_by = $user->id;
+            $course->save();
+
+            return response($course->jsonSerialize(), Response::HTTP_OK);
+        } else {
+            return response()->json(['message' => 'Need to login before creating']);
+        }
     }
 
     /**
@@ -141,9 +164,25 @@ class CourseController extends Controller
      * @param  \App\Course  $course
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Course $course)
+    public function destroy(Request $request, $id)
     {
-        //
+        $token = $request->bearerToken();
+        JWTAuth::setToken($token);
+
+        // TODO: Errors 
+        // Tymon \ JWTAuth \ Exceptions \ TokenInvalidException
+        // Tymon \ JWTAuth \ Exceptions \ TokenExpiredException
+        // 
+        $user = JWTAuth::toUser();
+        if ($user->username != null) {
+            // TODO: Check if exists
+            $course = Course::find($id);
+            $course->delete();
+
+            return response(['message' => 'Deleted successfully'], Response::HTTP_OK);
+        } else {
+            return response()->json(['message' => 'Need to login before creating']);
+        }
     }
 
     public function guard(){
