@@ -1,4 +1,4 @@
-<template>
+<template v-if="currentUser">
     <nav class="navbar navbar-expand-md navbar-light navbar-laravel mb-4">
       <div class="container">
             <router-link class="navbar-brand" to="/">Teacher Evaluation</router-link>
