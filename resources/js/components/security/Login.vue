@@ -1,53 +1,44 @@
 <template>
     <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
-				</div>
-                <div v-if="registeredUser" class="text-success">Thank you {{registeredUser.name}}.You can now login</div>
-				<form class="login100-form validate-form"  @submit.prevent="authenticate">
-					<span class="login100-form-title">
-						Member Login
+    	<div class="container-login">
+			<div class="wrap-login">
+        <form class="login-form validate-form " style="padding-left: 55px; padding-right: 55px; padding-top: 178px"  @submit.prevent="authenticate">
+					<span class="login-form-title">
+						Sign In
 					</span>
-                    <div class="form-group row" v-if="authError">
-                        <p class="error">
-                            {{authError}}
-                        </p>
-                    </div>
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" v-model="formLogin.email" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
+          <div v-if="registeredUser" class="text-success">Thank you {{registeredUser.name}}. You can now login.</div>
+				
+					<div class="wrap-input validate-input" style="margin-bottom: 16px;" data-validate="Please enter email">
+						<input class="input" type="email" name="username"  v-model="formLogin.email" placeholder="Email">
+						<span class="focus-input"></span>
 					</div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" v-model="formLogin.password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					
-					<div class="container-login100-form-btn">
-						<input type="submit" value="Login" class="login100-form-btn" />
+					<div class="wrap-input validate-input" data-validate = "Please enter password">
+						<input class="input" type="password" v-model="formLogin.password" name="pass" placeholder="Password">
+						<span class="focus-input"></span>
 					</div>
 
-					<div class="text-center p-t-12">
+					<div class="text-right" style="padding-top: 13px; padding-bottom: 23px;">
 						<span class="txt1">
 							Forgot
 						</span>
-						<a class="txt2" @click.prevent="forgot" href="#">
+
+						<a href="./ForgotPassword.html" @click.prevent="forgot" class="txt2">
 							Username / Password?
 						</a>
 					</div>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#" @click.prevent="signup">
-							Create your Account
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+					<div class="container-login-form-btn">
+						<input value="Sign in" type="submit" class="login-form-btn">
+					</div>
+
+					<div class="flex-col-c" style="padding-top: 70px; padding-bottom: 40px;">
+						<span class="txt1 p-b-9">
+							Don’t have an account?
+						</span>
+
+						<a href="register" @click.prevent="signup" class="txt3">
+							Sign Up
 						</a>
 					</div>
 				</form>
@@ -101,15 +92,8 @@ export default {
 </script>
 
 <style scoped>
-.error{
-    text-align: center;
-    color: red;
-}
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One'); 
 
 * {
 	margin: 0px; 
@@ -119,10 +103,11 @@ export default {
 
 body, html {
 	height: 100%;
+	font-family: 'Quicksand', sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
+	font-family: 'Quicksand', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -135,19 +120,20 @@ a {
 
 a:focus {
 	outline: none !important;
+  text-decoration: none;
 }
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #1b3815;
 }
 
-/*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
 
 p {
+	font-family: 'Quicksand', sans-serif ;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -160,10 +146,20 @@ ul, li {
 }
 
 
-/*---------------------------------------------*/
 input {
 	outline: none;
 	border: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 textarea {
@@ -175,27 +171,17 @@ textarea:focus, input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
+input::-webkit-input-placeholder { color: #1b3815;}
+input:-moz-placeholder { color: #1b3815;}
+input::-moz-placeholder { color: #1b3815;}
+input:-ms-input-placeholder { color: #1b3815;}
 
-input::-webkit-input-placeholder { color: #999999; }
-input:-moz-placeholder { color: #999999; }
-input::-moz-placeholder { color: #999999; }
-input:-ms-input-placeholder { color: #999999; }
+textarea::-webkit-input-placeholder { color: #1b3815;}
+textarea:-moz-placeholder { color: #1b3815;}
+textarea::-moz-placeholder { color: #1b3815;}
+textarea:-ms-input-placeholder { color: #1b3815;}
 
-textarea::-webkit-input-placeholder { color: #999999; }
-textarea:-moz-placeholder { color: #999999; }
-textarea::-moz-placeholder { color: #999999; }
-textarea:-ms-input-placeholder { color: #999999; }
-
-/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;
@@ -206,35 +192,36 @@ button:hover {
 	cursor: pointer;
 }
 
-iframe {
-	border: none !important;
-}
-
-
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
 .txt1 {
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: 'Quicksand', sans-serif ;
+  font-size: 15px;
   color: #999999;
+  line-height: 1.4;
 }
 
 .txt2 {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #666666;
+  font-family: 'Quicksand', sans-serif ;
+  font-size: 15px;
+  color: #57b846;
+  line-height: 1.4;
+}
+
+.txt3 {
+  font-family: 'Quicksand', sans-serif ; font-weight: 700;
+  font-size: 15px;
+  color: #57b846;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
 
 .limiter {
   width: 100%;
   margin: 0 auto;
 }
 
-.container-login100 {
+.container-login {
   width: 100%;  
   min-height: 100vh;
   display: -webkit-box;
@@ -246,147 +233,91 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  position: relative;
+  background-color: #fff;
 }
 
-.wrap-login100 {
-  width: 960px;
+.wrap-login {
+  width: 500px;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 177px 130px 33px 95px;
-}
-
-/*------------------------------------------------------------------
-[  ]*/
-.login100-pic {
-  width: 316px;
-}
-
-.login100-pic img {
-  max-width: 100%;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 
-/*------------------------------------------------------------------
-[  ]*/
-.login100-form {
-  width: 290px;
+
+.login-form {
+  width: 100%;
+  position: relative;
 }
 
-.login100-form-title {
-  font-size: 24px;
-  color: #333333;
+.login-form-title {
+  font-family: 'Text Me One', sans-serif;
+  font-size: 40px;
+  color: #fff;
   line-height: 1.2;
   text-align: center;
 
-  width: 100%;
-  display: block;
-  padding-bottom: 54px;
-}
-
-
-/*---------------------------------------------*/
-.wrap-input100 {
-  position: relative;
-  width: 100%;
-  z-index: 1;
-  margin-bottom: 10px;
-}
-
-.input100 {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #666666;
-
-  display: block;
-  width: 100%;
-  background: #e6e6e6;
-  height: 50px;
-  border-radius: 25px;
-  padding: 0 30px 0 68px;
-}
-
-
-/*------------------------------------------------------------------
-[ Focus ]*/
-.focus-input100 {
   display: block;
   position: absolute;
-  border-radius: 25px;
-  bottom: 0;
+  width: 100%;
+  top: 0;
   left: 0;
+  background-color: #57b846;
+  padding-top: 50px;
+  padding-bottom: 39px;
+}
+
+
+.wrap-input {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 27px;
+  position: relative;
+  z-index: 1;
+}
+
+.input {
+  font-family: 'Quicksand', sans-serif ; font-weight: 700;
+  font-size: 15px;
+  color: #1b3815;
+  line-height: 1.2;
+
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 55px;
+  background: #ebebeb;
+  border-radius: 27px;
+  padding: 0 35px 0 35px;
+}
+
+
+.focus-input {
+  display: block;
+  position: absolute;
   z-index: -1;
   width: 100%;
   height: 100%;
-  box-shadow: 0px 0px 0px 0px;
-  color: rgba(87,184,70, 0.8);
-}
-
-.input100:focus + .focus-input100 {
-  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-  animation: anim-shadow 0.5s ease-in-out forwards;
-}
-
-@-webkit-keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 70px 25px;
-    opacity: 0;
-  }
-}
-
-@keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 70px 25px;
-    opacity: 0;
-  }
-}
-
-.symbol-input100 {
-  font-size: 15px;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  border-radius: 25px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding-left: 35px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 31px;
+  background-color: #ebebeb;
   pointer-events: none;
-  color: #666666;
-
-  -webkit-transition: all 0.4s;
-  -o-transition: all 0.4s;
-  -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
 
-.input100:focus + .focus-input100 + .symbol-input100 {
-  color: #57b846;
-  padding-left: 28px;
+.input100:focus + .focus-input {
+  width: calc(100% + 20px);
 }
 
-/*------------------------------------------------------------------
-[ Button ]*/
-.container-login100-form-btn {
+.container-login-form-btn {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -395,20 +326,9 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 20px;
 }
 
-.login100-form-btn {
-  font-family: Montserrat-Bold;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #fff;
-  text-transform: uppercase;
-
-  width: 100%;
-  height: 50px;
-  border-radius: 25px;
-  background: #57b846;
+.login-form-btn {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -416,7 +336,18 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 25px;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  background-color: #57b846;
+  border-radius: 25px;
+
+  font-family: 'Quicksand', sans-serif ; 
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -424,115 +355,22 @@ iframe {
   transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
-  background: #333333;
+.login-form-btn:hover {
+  background-color: #1b3815;
 }
 
-
-
-/*------------------------------------------------------------------
-[ Responsive ]*/
-
-
-
-@media (max-width: 992px) {
-  .wrap-login100 {
-    padding: 177px 90px 33px 85px;
-  }
-
-  .login100-pic {
-    width: 35%;
-  }
-
-  .login100-form {
-    width: 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .wrap-login100 {
-    padding: 100px 80px 33px 80px;
-  }
-
-  .login100-pic {
-    display: none;
-  }
-
-  .login100-form {
-    width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  .wrap-login100 {
-    padding: 100px 15px 33px 15px;
-  }
-}
-
-
-/*------------------------------------------------------------------
-[ Alert validate ]*/
 
 .validate-input {
   position: relative;
 }
 
-.alert-validate::before {
-  content: attr(data-validate);
-  position: absolute;
-  max-width: 70%;
-  background-color: white;
-  border: 1px solid #c80000;
-  border-radius: 13px;
-  padding: 4px 25px 4px 10px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 8px;
-  pointer-events: none;
 
-  color: #c80000;
-  font-size: 13px;
-  line-height: 1.4;
-  text-align: left;
 
-  visibility: hidden;
-  opacity: 0;
-
-  -webkit-transition: opacity 0.4s;
-  -o-transition: opacity 0.4s;
-  -moz-transition: opacity 0.4s;
-  transition: opacity 0.4s;
-}
-
-.alert-validate::after {
-  content: "\f06a";
-  font-family: FontAwesome;
-  display: block;
-  position: absolute;
-  color: #c80000;
-  font-size: 15px;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
-  right: 13px;
-}
-
-.alert-validate:hover:before {
-  visibility: visible;
-  opacity: 1;
-}
-
-@media (max-width: 992px) {
-  .alert-validate::before {
-    visibility: visible;
-    opacity: 1;
+@media (max-width: 576px) {
+  .login-form {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
+
 </style>

@@ -8,6 +8,7 @@ export default {
         auth_error: null,
         reg_error:null,
         registeredUser: null,
+        toggled: false
     },
     getters: {
         isLoading(state){
@@ -28,8 +29,14 @@ export default {
         registeredUser(state){
             return state.registeredUser;
         },
+        isToggled(state) {
+            return state.toggled;
+        }
     },
     mutations: {
+        toggle(state) {
+            state.toggled = !state.toggled;
+        },
         login(state){
             state.loading = true;
             state.auth_error = null;

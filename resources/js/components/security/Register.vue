@@ -1,69 +1,61 @@
 <template>
     <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-pic js-tilt" data-tilt>
-					<img src="images/img-01.png" alt="IMG">
-				</div>
-				<form class="login100-form validate-form"  @submit.prevent="register">
-					<span class="login100-form-title">
-						Register
+
+    <div class="container-register">
+			<div class="wrap-register">
+				<form class="register-form validate-form"  @submit.prevent="register" style="padding-left: 55px; padding-right: 55px; padding-top: 178px" >
+					<span class="register-form-title">
+						Sign Up
 					</span>
-                    <div class="form-group row" v-if="regError">
-                        <p class="error">
-                            {{regError}}
-                        </p>
-                    </div>
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" v-validate="'required'"  v-model="formRegister.nane" name="name" placeholder="Full Name">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-pencil" aria-hidden="true"></i>
+					<div class="form-group row" v-if="regError">
+              <p class="error">
+                  {{regError}}
+              </p>
+          </div>
+          					
+          <div class="wrap-input validate-input" style="margin-bottom: 16px;" data-validate = "Please enter your name">
+            <span v-if="errors.has('name')" class="invalid-feedback" role="alert">{{ errors.first('name') }}</span>
+						<input class="input" type="text" name="name" v-model="formRegister.name" placeholder="Name">
+						<span class="focus-input"></span>
+					</div>
+
+          <div class="wrap-input validate-input" style="margin-bottom: 16px;"  data-validate="Please enter username">
+            <span v-if="errors.has('username')" class="invalid-feedback" role="alert">{{ errors.first('username') }}</span>
+						<input class="input" type="text" name="username" v-model="formRegister.username" placeholder="Username">
+						<span class="focus-input"></span>
+					</div>
+
+					<div class="wrap-input validate-input" style="margin-bottom: 16px;"  data-validate="Please enter your email address">
+            <span v-if="errors.has('email')" class="invalid-feedback" role="alert">{{ errors.first('email') }}</span>
+						<input class="input" type="email" name="email" v-model="formRegister.email" placeholder="Email">
+						<span class="focus-input"></span>
+					</div>
+
+					<div class="wrap-input validate-input" style="margin-bottom: 16px;" data-validate = "Please enter password">
+						<input class="input" type="password" name="pass"  v-model="formRegister.password" placeholder="Password">
+						<span class="focus-input"></span>
+					</div>
+
+
+          <div class="container-register-form-btn">
+						<button class="register-form-btn">
+							Sign Up
+						</button>
+					</div>
+
+					<div class="flex-col-c" style="padding-top: 30px; padding-bottom: 40px;">
+						<span class="txt1" style="padding-bottom: 9px;">
+							Already have an account?
 						</span>
-                        <span v-if="errors.has('name')" class="invalid-feedback" role="alert">{{ errors.first('name') }}</span>
-					</div>
 
-					<div class="wrap-input100 validate-input">
-						<input class="input100" type="text" v-validate="'required'"  v-model="formRegister.username" name="username" placeholder="Username">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-user" aria-hidden="true"></i>
-						</span>
-                        <span v-if="errors.has('username')" class="invalid-feedback" role="alert">{{ errors.first('username') }}</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="email" v-validate="'required'"  v-model="formRegister.email" name="email" placeholder="Email">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-envelope" aria-hidden="true"></i>
-						</span>
-                        <span v-if="errors.has('email')" class="invalid-feedback" role="alert">{{ errors.first('email') }}</span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" v-validate="'required'"  v-model="formRegister.password" name="pass" placeholder="Password">
-						<span class="focus-input100"></span>
-						<span class="symbol-input100">
-							<i class="fa fa-lock" aria-hidden="true"></i>
-						</span>
-					</div>
-					
-					<div class="container-login100-form-btn">
-						<input type="submit" value="Login" class="login100-form-btn" />
-					</div>
-
-
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#" @click.prevent="login">
-							Login
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						<a class="txt3" href="login" @click.prevent="login">
+							Sign In
 						</a>
 					</div>
 				</form>
 			</div>
 		</div>
-	</div>
+  </div>
 </template>
 
 <script>
@@ -93,7 +85,7 @@ export default {
             })
         }, 
         login () {
-            this.$router.push({path: '/register'});
+            this.$router.push({path: '/login'});
         }
     },
     computed:{
@@ -105,13 +97,8 @@ export default {
 </script>
 
 <style scoped>
-.error{
-    text-align: center;
-    color: red;
-}
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One'); 
 
 * {
 	margin: 0px; 
@@ -121,10 +108,11 @@ export default {
 
 body, html {
 	height: 100%;
+	font-family: 'Quicksand', sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
+	font-family: 'Quicksand', sans-serif;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -141,15 +129,15 @@ a:focus {
 
 a:hover {
 	text-decoration: none;
-  color: #57b846;
+  color: #2d1435;
 }
 
-/*---------------------------------------------*/
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
 
 p {
+	font-family: 'Quicksand', sans-serif ;
 	font-size: 14px;
 	line-height: 1.7;
 	color: #666666;
@@ -162,10 +150,20 @@ ul, li {
 }
 
 
-/*---------------------------------------------*/
 input {
 	outline: none;
 	border: none;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
 
 textarea {
@@ -177,27 +175,17 @@ textarea:focus, input:focus {
   border-color: transparent !important;
 }
 
-input:focus::-webkit-input-placeholder { color:transparent; }
-input:focus:-moz-placeholder { color:transparent; }
-input:focus::-moz-placeholder { color:transparent; }
-input:focus:-ms-input-placeholder { color:transparent; }
 
-textarea:focus::-webkit-input-placeholder { color:transparent; }
-textarea:focus:-moz-placeholder { color:transparent; }
-textarea:focus::-moz-placeholder { color:transparent; }
-textarea:focus:-ms-input-placeholder { color:transparent; }
+input::-webkit-input-placeholder { color: #2d1435;}
+input:-moz-placeholder { color: #2d1435;}
+input::-moz-placeholder { color: #2d1435;}
+input:-ms-input-placeholder { color: #2d1435;}
 
-input::-webkit-input-placeholder { color: #999999; }
-input:-moz-placeholder { color: #999999; }
-input::-moz-placeholder { color: #999999; }
-input:-ms-input-placeholder { color: #999999; }
+textarea::-webkit-input-placeholder { color: #2d1435;}
+textarea:-moz-placeholder { color: #2d1435;}
+textarea::-moz-placeholder { color: #2d1435;}
+textarea:-ms-input-placeholder { color: #2d1435;}
 
-textarea::-webkit-input-placeholder { color: #999999; }
-textarea:-moz-placeholder { color: #999999; }
-textarea::-moz-placeholder { color: #999999; }
-textarea:-ms-input-placeholder { color: #999999; }
-
-/*---------------------------------------------*/
 button {
 	outline: none !important;
 	border: none;
@@ -212,31 +200,36 @@ iframe {
 	border: none !important;
 }
 
-
-/*//////////////////////////////////////////////////////////////////
-[ Utility ]*/
 .txt1 {
-  font-size: 13px;
-  line-height: 1.5;
+  font-family: 'Quicksand', sans-serif ;
+  font-size: 15px;
   color: #999999;
+  line-height: 1.4;
 }
 
 .txt2 {
-  font-size: 13px;
-  line-height: 1.5;
-  color: #666666;
+  font-family: 'Quicksand', sans-serif ;
+  font-size: 15px;
+  color: #9c46b8;
+  line-height: 1.4;
+}
+
+.txt3 {
+  font-family: 'Quicksand', sans-serif ; font-weight: 700;
+  font-size: 15px;
+  color: #9c46b8;
+  line-height: 1.4;
+  text-transform: uppercase;
 }
 
 
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
 
 .limiter {
   width: 100%;
   margin: 0 auto;
 }
 
-.container-login100 {
+.container-register {
   width: 100%;  
   min-height: 100vh;
   display: -webkit-box;
@@ -248,147 +241,99 @@ iframe {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background: #9053c7;
-  background: -webkit-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -o-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: -moz-linear-gradient(-135deg, #c850c0, #4158d0);
-  background: linear-gradient(-135deg, #c850c0, #4158d0);
+  position: relative;
+  background-color: #fff;
 }
 
-.wrap-login100 {
-  width: 960px;
+.wrap-register {
+  width: 500px;
   background: #fff;
-  border-radius: 10px;
+  border-radius: 20px;
   overflow: hidden;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 177px 130px 33px 95px;
-}
-
-/*------------------------------------------------------------------
-[  ]*/
-.login100-pic {
-  width: 316px;
-}
-
-.login100-pic img {
-  max-width: 100%;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -o-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
+  -ms-box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
 
-/*------------------------------------------------------------------
-[  ]*/
-.login100-form {
-  width: 290px;
+
+.register-form {
+  width: 100%;
+  position: relative;
 }
 
-.login100-form-title {
-  font-size: 24px;
-  color: #333333;
+.register-form-title {
+  font-family: 'Text Me One', sans-serif;
+  font-size: 40px;
+  color: #fff;
   line-height: 1.2;
   text-align: center;
 
-  width: 100%;
-  display: block;
-  padding-bottom: 54px;
-}
-
-
-/*---------------------------------------------*/
-.wrap-input100 {
-  position: relative;
-  width: 100%;
-  z-index: 1;
-  margin-bottom: 10px;
-}
-
-.input100 {
-  font-size: 15px;
-  line-height: 1.5;
-  color: #666666;
-
-  display: block;
-  width: 100%;
-  background: #e6e6e6;
-  height: 50px;
-  border-radius: 25px;
-  padding: 0 30px 0 68px;
-}
-
-
-/*------------------------------------------------------------------
-[ Focus ]*/
-.focus-input100 {
   display: block;
   position: absolute;
-  border-radius: 25px;
-  bottom: 0;
+  width: 100%;
+  top: 0;
   left: 0;
+  background-color: #9c46b8;
+  padding-top: 50px;
+  padding-bottom: 39px;
+}
+
+
+.wrap-input {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 27px;
+  position: relative;
+  z-index: 1;
+}
+
+.input {
+  font-family: 'Quicksand', sans-serif ; font-weight: 700;
+  font-size: 15px;
+  color: #2d1435;
+  line-height: 1.2;
+
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 55px;
+  background: #ebebeb;
+  border-radius: 27px;
+  padding: 0 35px 0 35px;
+}
+
+
+.focus-input {
+  display: block;
+  position: absolute;
   z-index: -1;
   width: 100%;
   height: 100%;
-  box-shadow: 0px 0px 0px 0px;
-  color: rgba(87,184,70, 0.8);
-}
-
-.input100:focus + .focus-input100 {
-  -webkit-animation: anim-shadow 0.5s ease-in-out forwards;
-  animation: anim-shadow 0.5s ease-in-out forwards;
-}
-
-@-webkit-keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 70px 25px;
-    opacity: 0;
-  }
-}
-
-@keyframes anim-shadow {
-  to {
-    box-shadow: 0px 0px 70px 25px;
-    opacity: 0;
-  }
-}
-
-.symbol-input100 {
-  font-size: 15px;
-
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  border-radius: 25px;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  padding-left: 35px;
+  top: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
+  border-radius: 31px;
+  background-color: #ebebeb;
   pointer-events: none;
-  color: #666666;
-
+  
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
   -moz-transition: all 0.4s;
   transition: all 0.4s;
 }
 
-.input100:focus + .focus-input100 + .symbol-input100 {
-  color: #57b846;
-  padding-left: 28px;
+.input100:focus + .focus-input {
+  width: calc(100% + 20px);
 }
 
-/*------------------------------------------------------------------
-[ Button ]*/
-.container-login100-form-btn {
+.container-register-form-btn {
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -397,20 +342,9 @@ iframe {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-top: 20px;
 }
 
-.login100-form-btn {
-  font-family: Montserrat-Bold;
-  font-size: 15px;
-  line-height: 1.5;
-  color: #fff;
-  text-transform: uppercase;
-
-  width: 100%;
-  height: 50px;
-  border-radius: 25px;
-  background: #57b846;
+.register-form-btn {
   display: -webkit-box;
   display: -webkit-flex;
   display: -moz-box;
@@ -418,7 +352,18 @@ iframe {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 25px;
+  padding: 0 20px;
+  width: 100%;
+  height: 50px;
+  background-color: #9c46b8;
+  border-radius: 25px;
+
+  font-family: 'Quicksand', sans-serif ; 
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
+  line-height: 1.2;
+  text-transform: uppercase;
 
   -webkit-transition: all 0.4s;
   -o-transition: all 0.4s;
@@ -426,54 +371,10 @@ iframe {
   transition: all 0.4s;
 }
 
-.login100-form-btn:hover {
-  background: #333333;
+.register-form-btn:hover {
+  background-color: #2d1435;
 }
 
-
-
-/*------------------------------------------------------------------
-[ Responsive ]*/
-
-
-
-@media (max-width: 992px) {
-  .wrap-login100 {
-    padding: 177px 90px 33px 85px;
-  }
-
-  .login100-pic {
-    width: 35%;
-  }
-
-  .login100-form {
-    width: 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .wrap-login100 {
-    padding: 100px 80px 33px 80px;
-  }
-
-  .login100-pic {
-    display: none;
-  }
-
-  .login100-form {
-    width: 100%;
-  }
-}
-
-@media (max-width: 576px) {
-  .wrap-login100 {
-    padding: 100px 15px 33px 15px;
-  }
-}
-
-
-/*------------------------------------------------------------------
-[ Alert validate ]*/
 
 .validate-input {
   position: relative;
@@ -482,10 +383,11 @@ iframe {
 .alert-validate::before {
   content: attr(data-validate);
   position: absolute;
+  z-index: 1000;
   max-width: 70%;
-  background-color: white;
+  background-color: #fff;
   border: 1px solid #c80000;
-  border-radius: 13px;
+  border-radius: 14px;
   padding: 4px 25px 4px 10px;
   top: 50%;
   -webkit-transform: translateY(-50%);
@@ -493,9 +395,10 @@ iframe {
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
-  right: 8px;
+  right: 10px;
   pointer-events: none;
 
+  font-family: 'Quicksand', sans-serif ; font-weight: 700;;
   color: #c80000;
   font-size: 13px;
   line-height: 1.4;
@@ -515,15 +418,16 @@ iframe {
   font-family: FontAwesome;
   display: block;
   position: absolute;
+  z-index: 1100;
   color: #c80000;
-  font-size: 15px;
+  font-size: 16px;
   top: 50%;
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
-  right: 13px;
+  right: 16px;
 }
 
 .alert-validate:hover:before {
@@ -537,4 +441,12 @@ iframe {
     opacity: 1;
   }
 }
+
+@media (max-width: 576px) {
+  .register-form {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
 </style>

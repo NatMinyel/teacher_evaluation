@@ -1,14 +1,56 @@
 
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+// @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
 
 // Bootstrap
-@import '~bootstrap/scss/bootstrap';
+// @import '~bootstrap/scss/bootstrap';
 
 .navbar-laravel {
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
+
+@import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+@import url('https://fonts.googleapis.com/css?family=Text+Me+One'); 
+
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+body, html {
+  background: white;
+	height: 100%;
+  font-family: 'Quicksand', sans-serif;
+}
+
+button {
+	outline: none !important;
+	border: none;
+	background: transparent;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+.main {
+  margin: 0 auto;
+  margin-left: 3%;
+  clear: both;
+}
+
+

@@ -29,7 +29,8 @@ class CourseController extends Controller
         // Tymon \ JWTAuth \ Exceptions \ TokenExpiredException
         // 
         $user = JWTAuth::toUser();
-        return response(Course::all()->jsonSerialize(), Response::HTTP_OK);
+        // return response(Course::all()->jsonSerialize(), Response::HTTP_OK);
+        return response(Course::where("created_by", $user->id)->get()->jsonSerialize(), Response::HTTP_OK);
     }
 
     /**

@@ -1,8 +1,24 @@
 <template>
-    <div class="course">
-        <div class="col-2">
-            <h3>Name: {{ name }}</h3>
-            <div>{{ description }}</div>
+    <div class="container-course">
+        <div class="wrap-course">
+            <div class="course-card">
+                <div class="course-card-title">
+                    {{ name }}
+                </div>
+
+                <div class="course-description">
+                    <div class="course-description-text">
+                        {{ description }}    
+                    </div>
+                    <div class="course-description-enter">
+                        <button class="course-description-enter-btn"><router-link to="/courses/{name}">Enter Course</router-link></button>
+                    </div>
+                </div>
+            </div>
+            <div class="container-course-card-footer">
+                <span class="footer-department">Computer Science</span>
+                <span class="footer-deadline pull-right"><i class="fas fa-clock"></i> 25/12/2018</span>
+            </div>
         </div>
     </div>
 </template>
@@ -21,21 +37,6 @@
   }
 </script>
 <style>
-    .course {
-        display: flex;
-        margin: 1em 1em 1em 0;
-        border: 1px solid #d1d1d1;
-        padding: 1em;
-        max-width: 350px;
-        background-color: white;
-    }
-    .course img {
-        height: 70px;
-    }
-    .col-2 {
-        margin-left: 1em;
-    }
-    .col-2 > h3 {
-        margin: 0.5em 0;
-    }
+
+
 </style>

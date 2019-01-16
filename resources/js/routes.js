@@ -1,5 +1,6 @@
 import Home from './components/Home.vue';
 import Dashboard from './components/Dashboard.vue';
+import Settings from './components/user/Settings.vue';
 import Login from './components/security/Login.vue';
 import Register from './components/security/Register.vue';
 import Courses from './components/course/Courses.vue';
@@ -15,6 +16,10 @@ export const routes = [
         path: '/register',
         name: 'register',
         component: Register
+    }, {
+        path: '/settings',
+        name: 'settings',
+        component: Settings
     }, {
         path: '/login',
         name: 'login',
